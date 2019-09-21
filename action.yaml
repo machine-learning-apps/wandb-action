@@ -8,11 +8,13 @@ inputs:
   PROJECT_NAME:
     description: The entity/project name associated with your wandb project.  Example - 'github/predict-issue-labels'
     required: true
+  RUN_ID:
+    description: the run id, which can be found in the url https://app.wandb.ai/{entity_name}/{project_name}/runs/{run_ID}.  When supplying this input, FILTER_GITHUB_SHA and FILTER_SECONDARY_SHA are ignored and only the run corresponding to this id (along with any baselines corresponding to the input BASELINE_TAGS) are returned.
   FILTER_GITHUB_SHA:
-    description: The git SHA that you want to filter runs by.  This assumes you have a logged a configuration variable named 'github_sha' to your runs. A common usage pattern is to supply the built-in environment variable $GITHUB_SHA, to get the commit SHA that triggered the workflow.
-    require: true
+    description: The git SHA that you want to filter runs by.  This assumes you have a logged a configuration variable named 'github_sha' to your runs. A common usage pattern is to supply the built-in environment variable $GITHUB_SHA, to get the commit SHA that triggered the workflow.  Note that this argument is ignored if RUN_ID is specified.
+    require: false
   FILTER_SECONDARY_SHA:
-    description: This is an optional field you can filter your runs by.  This assumes you have logged a configuration variable named 'secondary_sha' to your model runs.  You might use this field for data versioning.
+    description: This is an optional field you can filter your runs by.  This assumes you have logged a configuration variable named 'secondary_sha' to your model runs.  You might use this field for data versioning.  Note that this argument is ignored if RUN_ID is specified.
     require: false
     default: ""
   BASELINE_TAGS:
@@ -32,18 +34,20 @@ inputs:
     require: false
     default: ""
 outputs:
-  NUM_FINISHED:
-    description: The number of runs that correspond to the FILTER_GITHUB_SHA with a state of 'finished'
-  NUM_RUNNING:
-    description: The number of runs that correspond to the FILTER_GITHUB_SHA with a state of 'running'
-  NUM_CRASHED:
-    description: The number of runs that correspond to the FILTER_GITHUB_SHA with a state of 'crashed'
-  NUM_ABORTED:
-    description: The number of runs that correspond to the FILTER_GITHUB_SHA with a state of 'aborted'
-  NUM_BASELINES:
-    description: The number of runs that with at least one tag that matches BASELINE_TAGS and are NOT runs where github_sha = FILTER_GITHUB_SHA
   BOOL_COMPLETE:
-    description: True if there is at least 1 finished run and no runs that have a state of 'running'
+    description: True if there is at least 1 finished run and no runs that have a state of 'running' else False
+  BOOL_SINGLE_RUN:
+    description: True if there is only 1 run returned from the query else False
+  NUM_FINISHED:
+    description: The number of non-baseline runs with a state of 'finished'
+  NUM_RUNNING:
+    description: The number of non-baseline runs with a state of 'running'
+  NUM_CRASHED:
+    description: The number of non-baseline runs with a state of 'crashed'
+  NUM_ABORTED:
+    description: The number of non-baseline runs with a state of 'aborted'
+  NUM_BASELINES:
+    description: The number of baseline runs returned.
 branding:
   color: 'yellow'
   icon: 'bar-chart-2'
