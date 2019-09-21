@@ -18,6 +18,7 @@ api = wandb.Api()
 
 # Read Inputs
 project_name = os.getenv('INPUT_PROJECT_NAME')
+run_id = os.getenv('INPUT_RUN_ID')
 save_folder = os.getenv('GITHUB_WORKSPACE')
 metrics = eval(os.getenv('INPUT_DISPLAY_METRICS'))
 config_vars = eval(os.getenv('INPUT_DISPLAY_CONFIG_VARS'))
@@ -31,25 +32,41 @@ tags = eval(os.getenv('INPUT_BASELINE_TAGS'))
 print(f'Debug Mode On: {debug}')
 
 if debug:
-    logging.debug(f'INPUT_BASELINE_TAGS: {tags}')
-    logging.debug(f'INPUT_FILTER_GITHUB_SHA: {github_sha}')
-    logging.debug(f'INPUT_FILTER_SECONDARY_SHA: {secondary_sha}')
-    logging.debug(f'INPUT_DISPLAY_CONFIG_VARS: {config_vars}')
-    logging.debug(f'INPUT_DISPLAY_METRICS: {metrics}')
+    logging.debug(f'RUN_ID: {run_id}')
+    logging.debug(f'BASELINE_TAGS: {tags}')
+    logging.debug(f'FILTER_GITHUB_SHA: {github_sha}')
+    logging.debug(f'FILTER_SECONDARY_SHA: {secondary_sha}')
+    logging.debug(f'DISPLAY_CONFIG_VARS: {config_vars}')
+    logging.debug(f'DISPLAY_METRICS: {metrics}')
 
-#validate input
+# validate inputs
 def check_list(var, name):
-    assert isinstance(var, list), f"{name} argument must evaluate to a python list"
+    assert isinstance(var, list), f"{name} input must evaluate to a python list"
     if var:
-        assert max([isinstance(x, str) for x in var]), f"{name} argument must be a list of strings"
+        assert max([isinstance(x, str) for x in var]), f"{name} input must be a list of strings"
 
 check_list(tags, "BASELINE_TAGS")
 check_list(metrics, "METRICS")
 check_list(config_vars, "CONFIG_VARS")
 
+assert run_id or github_sha, "You must supply an input for either FILTER_GITHUB_SHA or RUN_ID.  Both of these inputs are not specified."
+
+if secondary_sha and not github_sha:
+    raise Exception("If input FILTER_SECONDARY_SHA is supplied you must also supply an input for FILTER_GITHUB_SHA")
+
+
+
+if run_id:
+    runs=api.runs(project_name, filters={"name":f"{run_id}"})
+    baseline_runs=api.runs(project_name, filters={"$and": [{"tags": {"$in": tags}},
+                                                           {"name": {"$ne": f"{run_id}"}}]
+                                                 }
+                           )
+    if github_sha:
+        logging.info("You have supplied both inputs FILTER_GITHUB_SHA and RUN_ID.  Runs matching FILTER_GITHUB_SHA will be ignored and only the run corresponding to RUN_ID will be returned.")
 
 #run a query for all runs matching the github sha AND optionally the secondary sha
-if secondary_sha:
+if not run_id and github_sha and secondary_sha:
     runs = api.runs(project_name, {"$and": [{"config.github_sha": f"{github_sha}"},
                                             {"config.secondary_sha": f"{secondary_sha}"}]
                                   }
@@ -65,7 +82,7 @@ if secondary_sha:
                                          }
                            )
 
-else:
+if not run_id and github_sha and not secondary_sha:
     runs = api.runs(project_name, {"config.github_sha": f"{github_sha}"})
     # baseline runs should be mutually exclusive from the experimental runs 
     # the only time the github_sha is allowed to not exist is for baseline runs
@@ -84,15 +101,15 @@ finished_runs = [run for run in runs if runs and run.state == 'finished']
 running_runs = [run for run in runs if runs and run.state == 'running']
 crashed_runs = [run for run in runs if run.state == 'crashed']
 aborted_runs = [run for run in runs if run.state == 'aborted']
-bool_complete = True if finished_runs and not running_runs else False
 
 # emit variables as outputs for other actions
+print(f'::set-output name=BOOL_COMPLETE::{True if finished_runs and not running_runs else False}')
+print(f'::set-output name=BOOL_SINGLE_RUN::{True if len(runs) == 1 else False}')
 print(f'::set-output name=NUM_FINISHED::{len(finished_runs)}')
 print(f'::set-output name=NUM_RUNNING::{len(running_runs)}')
 print(f'::set-output name=NUM_CRASHED::{len(crashed_runs)}')
 print(f'::set-output name=NUM_ABORTED::{len(aborted_runs)}')
 print(f'::set-output name=NUM_BASELINES::{len(baseline_runs)}')
-print(f'::set-output name=BOOL_COMPLETE::{bool_complete}')
 
 
 def summarize_runs(runs, eval_category_label, debug, metrics=[], config_vars=[]):
