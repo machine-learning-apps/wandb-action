@@ -59,9 +59,9 @@ This action fetches all model runs that either:
 
 ### Querying Additonal Baseline Runs
 
-It is often useful to compare model runs against baseline runs or your current best models in order to properly assess model performance.  Therefore, in addition to the runs described above, you can also query runs by tag, which is a label you can assign either programatically or in the W&B user interface.  You can supply a list of tags as additional runs that will be queried (see the [inputs](#inputs) section below).  Two properties of baseline runs that are important:
+It is often useful to compare model runs against baseline runs or your current best models in order to properly assess model performance.  Therefore, in addition to the runs described above, you can also query runs by tag, which is a label you can assign either programatically or in the W&B user interface.  You can supply a list of tags as additional runs that will be queried.  See the `BASELINE_TAGS` input in the [Inputs](#inputs) section below).  Two properties of baseline runs that are important:
 
-- Any runs retrieved will be marked as `baseline` in the output csv file in a column named `__eval.category`.  See the [outputs] section for more detail.
+- Baseline runs will be marked as `baseline` in the output csv file in a column named `__eval.category`.  See the [outputs] section for more detail.
 - Baselines runs are mutually exclusive with other runs that you are querying.  If there are runs that are in both the baseline set and the candidate set, this will be resolved by moving those runs into the candidate set. The candidate set refers to any runs returned by methods 1 or 2 in Querying Model Runs.
 
 ### Saving & Displaying Model Run Data
