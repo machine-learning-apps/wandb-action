@@ -124,4 +124,4 @@ You can reference the outputs of an action using [expression syntax](https://hel
 4. `NUM_RUNNING`: The number of non-baseline runs with a state of 'running'
 5. `NUM_CRASHED`: The number of non-baseline runs with a state of 'crashed'
 6. `NUM_ABORTED`: The number of non-baseline runs with a state of 'aborted'
-7. `NUM_BASELINES`: The number of baseline runs returned.  See [this section](#querying-additonal-baseline-runs) for an explanation of what a baseline run is.
+7. `NUM_BASELINES`: The number of baseline runs returned.  See [this section](#querying-additonal-baseline-runs) for more context regarding baseline runs.
