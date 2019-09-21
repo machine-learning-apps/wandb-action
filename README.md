@@ -1,5 +1,6 @@
-# GitHub Action That Retrieves Model Runs From [Weights & Biases](https://www.wandb.com/)
+# GitHub Action That Retrieves Model Runs From Weights & Biases
 
+Weights & Biases [homepage](https://www.wandb.com/)
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
