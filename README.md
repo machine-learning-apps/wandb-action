@@ -67,7 +67,7 @@ It is often useful to compare model runs against baseline runs or your current b
 
 ### Saving & Displaying Model Run Data
 
-**This Action saves a csv file called `wandb_report.csv` into the path specified by the [default environment variable](https://help.github.com/en/articles/virtual-environments-for-github-actions#environment-variables) `GITHUB_WORKSPACE` set for you in GitHub Actions.**  Files in this directory can be accessed by subsequent Actions.  You can pass the information in this CSV to downstream Actions that can format these results and write them as markdown as a comment in the PR or integrate with the [GitHub Checks](https://developer.github.com/v3/checks/) API.
+**This Action saves a csv file called `wandb_report.csv` into the path specified by the [default environment variable](https://help.github.com/en/articles/virtual-environments-for-github-actions#environment-variables) `GITHUB_WORKSPACE` set for you in GitHub Actions**,  which allows this data to be accessed by subsequent Actions.  Information in this CSV can be displayed in a variety of ways, such as a markdown formatted comment in a pull request or via the [GitHub Checks](https://developer.github.com/v3/checks/) API.
 
 This csv file always has the following fields:
 - `run.url`: the url for the run in the W&B api.
