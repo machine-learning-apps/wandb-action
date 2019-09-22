@@ -19,11 +19,11 @@ Weights & Biases [homepage](https://www.wandb.com/)
 
 ## Motivation: Facilitating ML-Ops
 
-The code-review and deployment process re: Machine Learning often involves making decisions about merging or deploying code where critical information regarding model performance and statistics are not readily available.  This is due to the friction in including logging and statistics from model training runs in Pull Requests.  For example, consider this excerpt from a [real pull-request](https://github.com/kubeflow/code-intelligence/pull/54) from a machine learning project:
+The code-review and deployment process re: Machine Learning often involves making decisions about merging or deploying code where critical information regarding model performance and statistics are not readily available.  This is due to the friction in including logging and statistics from model training runs in Pull Requests.  For example, consider this excerpt from a [real pull-request](https://github.com/kubeflow/code-intelligence/pull/54) concerning a machine learning project:
 
 >![](/images/pr.png)
 
-In an ideal world, the participants in the above code review should have all the information to them available in the context of pull request that they need to evaluate the changes to the code, including:
+In an ideal world, the participants in the above code review should be provided with all of the context necessary to evaluate the PR, including:
 
 - Model performance metrics and statistics
 - Comparison with baselines and other models on a holdout dataset
