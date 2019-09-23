@@ -99,7 +99,7 @@ Below is an example of the contents of the csv file:
 ### Inputs
 
 #### Mandatory Inputs
-  1. `WANDB_API_KEY`: description: your W&B api key.
+  1. `WANDB_API_KEY`: your W&B api key.
   2. `PROJECT_NAME`:  The entity/project name associated with your wandb project.  Example - 'github/predict-issue-labels'
   3. Either `RUN_ID` or `FILTER_GITHUB_SHA` must be specified, even though these are both optional inputs.  See below for more details:
 
