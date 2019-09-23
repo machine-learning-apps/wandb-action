@@ -11,6 +11,7 @@ jobs:
         with:
           GITHUB_SHA: 'testsha1234'
           PROJECT_NAME: 'hamelsmu/test-wandb-action'
+          FILTER_GITHUB_SHA: "testsha1234"
           BASELINE_TAGS: "['baseline', 'reference']"
           DISPLAY_METRICS: "['acc', 'loss', 'val_acc', 'val_loss']"
           DISPLAY_CONFIG_VARS: "['secondary_sha']"
