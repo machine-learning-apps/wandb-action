@@ -5,15 +5,15 @@ jobs:
   test-run:
     runs-on: ubuntu-latest
     steps:
-      - name: Get Runs Using SHA
-        uses: machine-learning-apps/wandb-action@master
-        id: wandb1
-        with:
-          GITHUB_SHA: 'testsha1234'
-          PROJECT_NAME: 'hamelsmu/test-wandb-action'
-          BASELINE_TAGS: "['baseline', 'reference']"
-          DISPLAY_METRICS: "['acc', 'loss', 'val_acc', 'val_loss']'"
-          DISPLAY_CONFIG_VARS: "['secondary_sha']"
-          WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
-          DEBUG: "true"
+    - name: Get Runs Using SHA
+      uses: machine-learning-apps/wandb-action@master
+      id: wandb1
+      with:
+        GITHUB_SHA: 'testsha1234'
+        PROJECT_NAME: 'hamelsmu/test-wandb-action'
+        BASELINE_TAGS: "['baseline', 'reference']"
+        DISPLAY_METRICS: "['acc', 'loss', 'val_acc', 'val_loss']'"
+        DISPLAY_CONFIG_VARS: "['secondary_sha']"
+        WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
+        DEBUG: "true"
 
