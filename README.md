@@ -1,3 +1,6 @@
+![Actions Status](https://github.com/machine-learning-apps/wandb-action/workflows/Test/badge.svg)
+
+
 # GitHub Action That Retrieves Model Runs From Weights & Biases
 
 Weights & Biases [homepage](https://www.wandb.com/)
