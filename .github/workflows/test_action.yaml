@@ -1,5 +1,5 @@
-name: test wandb action
-on: push
+name: Test
+on: [push]
 
 jobs:
   test-run:
