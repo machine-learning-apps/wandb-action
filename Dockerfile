@@ -6,7 +6,6 @@ LABEL "com.github.actions.icon"="bar-chart-2"
 LABEL "com.github.actions.color"="yellow"
 
 RUN pip install wandb tabulate pandas
-ENV WANDB_API_KEY=$INPUT_WANDB_API_KEY
 ADD wandb_get_runs.py /wandb_get_runs.py
 RUN  chmod u+x /wandb_get_runs.py
 ENTRYPOINT ["python",  "wandb_get_runs.py"]

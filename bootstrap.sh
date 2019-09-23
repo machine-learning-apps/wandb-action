@@ -1,11 +1,11 @@
 #!/bin/bash
 docker build -t hamelsmu/wandb .
 
-INPUT_PROJECT_NAME="github/predict-issue-labels"
+INPUT_PROJECT_NAME="hamelsmu/test-wandb-action"
 GITHUB_WORKSPACE="/data"
-GITHUB_SHA="test"
+GITHUB_SHA="testsha1234"
 INPUT_DISPLAY_METRICS="['acc', 'loss', 'val_acc', 'val_loss']"
-INPUT_DISPLAY_CONFIG_VARS="['docker_digest']"
+INPUT_DISPLAY_CONFIG_VARS="['secondary_sha']"
 INPUT_BASELINE_TAGS="['baseline']"
 INPUT_DEBUG="y"
 
