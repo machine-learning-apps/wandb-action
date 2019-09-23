@@ -2,7 +2,7 @@ name: Test
 on: [push]
 
 jobs:
-  test-run:
+  test:
     runs-on: ubuntu-latest
     steps:
     - name: Get Runs Using SHA
