@@ -9,8 +9,8 @@ jobs:
       uses: machine-learning-apps/wandb-action@master
       id: wandb1
       with:
-        GITHUB_SHA: 'testsha1234'
-        PROJECT_NAME: 'hamelsmu/test-wandb-action'
+        GITHUB_SHA: "testsha1234"
+        PROJECT_NAME: "hamelsmu/test-wandb-action"
         BASELINE_TAGS: "['baseline', 'reference']"
         DISPLAY_METRICS: "['acc', 'loss', 'val_acc', 'val_loss']'"
         DISPLAY_CONFIG_VARS: "['secondary_sha']"
