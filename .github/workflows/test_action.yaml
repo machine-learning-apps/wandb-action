@@ -16,3 +16,4 @@ jobs:
           DISPLAY_CONFIG_VARS: "['secondary_sha']"
           WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
           DEBUG: "true"
+
