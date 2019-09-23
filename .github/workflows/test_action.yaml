@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Runs Using SHA
-        uses: machine-learning-apps/wandb-action
+        uses: machine-learning-apps/wandb-action@master
         id: wandb1
         with:
           GITHUB_SHA: 'testsha1234'
@@ -16,3 +16,4 @@ jobs:
           DISPLAY_CONFIG_VARS: "['secondary_sha']"
           WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
           DEBUG: "true"
+
