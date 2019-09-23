@@ -17,3 +17,20 @@ jobs:
           DISPLAY_CONFIG_VARS: "['secondary_sha']"
           WANDB_API_KEY: ${{ secrets.WANDB_API_KEY }}
           DEBUG: "true"
+      - name: test outputs
+        run: |
+          python -c "assert '${NUM_FINISHED}' == '3'"
+          python -c "assert '${NUM_BASELINES}' == '2'"
+          python -c "assert '${BOOL_COMPLETE}' == 'True'"
+          python -c "assert '${NUM_CRASHED}' == '0'"
+          python -c "assert '${NUM_ABORTED}' == '0'"
+          python -c "assert '${NUM_RUNNING}' == '0'"
+        env:
+          BOOL_COMPLETE: ${{ steps.wandb1.outputs.BOOL_COMPLETE }}
+          BOOL_SINGLE_RUN: ${{ steps.wandb1.outputs.BOOL_SINGLE_RUN }}
+          NUM_FINISHED: ${{ steps.wandb1.outputs.NUM_FINISHED }}
+          NUM_RUNNING: ${{ steps.wandb1.outputs.NUM_RUNNING }}
+          NUM_CRASHED: ${{ steps.wandb1.outputs.NUM_CRASHED }}
+          NUM_ABORTED: ${{ steps.wandb1.outputs.NUM_ABORTED }}
+          NUM_BASELINES: ${{ steps.wandb1.outputs.NUM_BASELINES }}
+
