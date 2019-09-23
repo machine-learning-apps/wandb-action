@@ -38,7 +38,7 @@ jobs:
     steps:
       - name: Get Runs Using SHA
         uses: machine-learning-apps/wandb-action@master
-        id: wandb1
+        id: wandb2
         with:
           RUN_ID: 'k271zzd3'
           PROJECT_NAME: 'hamelsmu/test-wandb-action'
@@ -57,21 +57,20 @@ jobs:
           python -c "assert '${NUM_ABORTED}' == '0'"
           python -c "assert '${NUM_RUNNING}' == '0'"
         env:
-          BOOL_COMPLETE: ${{ steps.wandb1.outputs.BOOL_COMPLETE }}
-          BOOL_SINGLE_RUN: ${{ steps.wandb1.outputs.BOOL_SINGLE_RUN }}
-          NUM_FINISHED: ${{ steps.wandb1.outputs.NUM_FINISHED }}
-          NUM_RUNNING: ${{ steps.wandb1.outputs.NUM_RUNNING }}
-          NUM_CRASHED: ${{ steps.wandb1.outputs.NUM_CRASHED }}
-          NUM_ABORTED: ${{ steps.wandb1.outputs.NUM_ABORTED }}
-          NUM_BASELINES: ${{ steps.wandb1.outputs.NUM_BASELINES }}
+          BOOL_COMPLETE: ${{ steps.wandb2.outputs.BOOL_COMPLETE }}
+          BOOL_SINGLE_RUN: ${{ steps.wandb2.outputs.BOOL_SINGLE_RUN }}
+          NUM_FINISHED: ${{ steps.wandb2.outputs.NUM_FINISHED }}
+          NUM_RUNNING: ${{ steps.wandb2.outputs.NUM_RUNNING }}
+          NUM_CRASHED: ${{ steps.wandb2.outputs.NUM_CRASHED }}
+          NUM_ABORTED: ${{ steps.wandb2.outputs.NUM_ABORTED }}
+          NUM_BASELINES: ${{ steps.wandb2.outputs.NUM_BASELINES }}
   with-secondary-sha:
     runs-on: ubuntu-latest
     steps:
       - name: Get Runs Using SHA
         uses: machine-learning-apps/wandb-action@master
-        id: wandb1
+        id: wandb3
         with:
-          RUN_ID: 'k271zzd3'
           PROJECT_NAME: 'hamelsmu/test-wandb-action'
           FILTER_GITHUB_SHA: "testsha5678"
           FILTER_SECONDARY_SHA: "testsecondarysha1234"
@@ -89,10 +88,10 @@ jobs:
           python -c "assert '${NUM_ABORTED}' == '0'"
           python -c "assert '${NUM_RUNNING}' == '0'"
         env:
-          BOOL_COMPLETE: ${{ steps.wandb1.outputs.BOOL_COMPLETE }}
-          BOOL_SINGLE_RUN: ${{ steps.wandb1.outputs.BOOL_SINGLE_RUN }}
-          NUM_FINISHED: ${{ steps.wandb1.outputs.NUM_FINISHED }}
-          NUM_RUNNING: ${{ steps.wandb1.outputs.NUM_RUNNING }}
-          NUM_CRASHED: ${{ steps.wandb1.outputs.NUM_CRASHED }}
-          NUM_ABORTED: ${{ steps.wandb1.outputs.NUM_ABORTED }}
-          NUM_BASELINES: ${{ steps.wandb1.outputs.NUM_BASELINES }}
+          BOOL_COMPLETE: ${{ steps.wandb3.outputs.BOOL_COMPLETE }}
+          BOOL_SINGLE_RUN: ${{ steps.wandb3.outputs.BOOL_SINGLE_RUN }}
+          NUM_FINISHED: ${{ steps.wandb3.outputs.NUM_FINISHED }}
+          NUM_RUNNING: ${{ steps.wandb3.outputs.NUM_RUNNING }}
+          NUM_CRASHED: ${{ steps.wandb3.outputs.NUM_CRASHED }}
+          NUM_ABORTED: ${{ steps.wandb3.outputs.NUM_ABORTED }}
+          NUM_BASELINES: ${{ steps.wandb3.outputs.NUM_BASELINES }}
