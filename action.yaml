@@ -10,6 +10,7 @@ inputs:
     required: true
   RUN_ID:
     description: the run id, which can be found in the url https://app.wandb.ai/{entity_name}/{project_name}/runs/{run_ID}.  When supplying this input, FILTER_GITHUB_SHA and FILTER_SECONDARY_SHA are ignored and only the run corresponding to this id (along with any baselines corresponding to the input BASELINE_TAGS) are returned.
+    required: false
   FILTER_GITHUB_SHA:
     description: The git SHA that you want to filter runs by.  This assumes you have a logged a configuration variable named 'github_sha' to your runs. A common usage pattern is to supply the built-in environment variable $GITHUB_SHA, to get the commit SHA that triggered the workflow.  Note that this argument is ignored if RUN_ID is specified.
     require: false
