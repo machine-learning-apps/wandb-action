@@ -95,3 +95,17 @@ jobs:
           NUM_CRASHED: ${{ steps.wandb3.outputs.NUM_CRASHED }}
           NUM_ABORTED: ${{ steps.wandb3.outputs.NUM_ABORTED }}
           NUM_BASELINES: ${{ steps.wandb3.outputs.NUM_BASELINES }}
+  pre-build-container:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Prebuild Image
+      run: |
+        cd $GITHUB_WORKSPACE
+        echo ${PASSWORD} | docker login -u $USERNAME --password-stdin
+        docker build -t hamelsmu/wandb-action -f prebuild.Dockerfile .
+        docker push hamelsmu/wandb-action
+      env:
+        USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        
