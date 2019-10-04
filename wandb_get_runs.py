@@ -20,8 +20,6 @@ api = wandb.Api()
 project_name = os.getenv('INPUT_PROJECT_NAME')
 run_id = os.getenv('INPUT_RUN_ID')
 save_folder = os.getenv('GITHUB_WORKSPACE')
-metrics = eval(os.getenv('INPUT_DISPLAY_METRICS'))
-config_vars = eval(os.getenv('INPUT_DISPLAY_CONFIG_VARS'))
 debug = True if os.getenv('INPUT_DEBUG') else False
 
 # Read Query Parameters
@@ -36,9 +34,13 @@ if debug:
     logging.debug(f'BASELINE_TAGS: {tags}')
     logging.debug(f'FILTER_GITHUB_SHA: {github_sha}')
     logging.debug(f'FILTER_SECONDARY_SHA: {secondary_sha}')
-    logging.debug(f'DISPLAY_CONFIG_VARS: {config_vars}')
-    logging.debug(f'DISPLAY_METRICS: {metrics}')
+    logging.debug(f'DISPLAY_CONFIG_VARS: {os.getenv('INPUT_DISPLAY_CONFIG_VARS')}')
+    logging.debug(f'DISPLAY_METRICS: {os.getenv('INPUT_DISPLAY_METRICS')}')
 
+    
+metrics = eval(os.getenv('INPUT_DISPLAY_METRICS'))
+config_vars = eval(os.getenv('INPUT_DISPLAY_CONFIG_VARS'))    
+    
 # validate inputs
 def check_list(var, name):
     assert isinstance(var, list), f"{name} input must evaluate to a python list"
