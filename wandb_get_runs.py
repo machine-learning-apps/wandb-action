@@ -143,6 +143,7 @@ def summarize_runs(runs, eval_category_label, debug, metrics=[], config_vars=[])
         summary_dict['run.entity'] = summary_dict.get('run.entity', []) + [run.entity]
         summary_dict['run.project'] = summary_dict.get('run.project', []) + [run.project]
         summary_dict['github_sha'] = summary_dict.get('github_sha', []) + [run.config.get('github_sha')]
+        summary_dict['run.description'] = summary_dict.get('run.description', []) + [run.description]          
 
         for metric in metrics:
             summary_dict[metric] = summary_dict.get(metric, []) + [run.summary_metrics.get(metric)]
