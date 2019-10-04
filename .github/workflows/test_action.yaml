@@ -3,6 +3,7 @@ on: [push]
 
 jobs:
   with-sha:
+    needs: pre-build-container
     runs-on: ubuntu-latest
     steps:
       - name: Get Runs Using SHA
@@ -34,6 +35,7 @@ jobs:
           NUM_ABORTED: ${{ steps.wandb1.outputs.NUM_ABORTED }}
           NUM_BASELINES: ${{ steps.wandb1.outputs.NUM_BASELINES }}
   with-sha-without-config:
+    needs: pre-build-container
     runs-on: ubuntu-latest
     steps:
       - name: Get Runs Using SHA
@@ -65,6 +67,7 @@ jobs:
           NUM_BASELINES: ${{ steps.wandb1.outputs.NUM_BASELINES }}
           
   with-run-id:
+    needs: pre-build-container
     runs-on: ubuntu-latest
     steps:
       - name: Get Runs Using SHA
@@ -96,6 +99,7 @@ jobs:
           NUM_ABORTED: ${{ steps.wandb2.outputs.NUM_ABORTED }}
           NUM_BASELINES: ${{ steps.wandb2.outputs.NUM_BASELINES }}
   with-secondary-sha:
+    needs: pre-build-container
     runs-on: ubuntu-latest
     steps:
       - name: Get Runs Using SHA
