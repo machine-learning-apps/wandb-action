@@ -34,6 +34,7 @@ if debug:
     logging.debug(f'BASELINE_TAGS: {tags}')
     logging.debug(f'FILTER_GITHUB_SHA: {github_sha}')
     logging.debug(f'FILTER_SECONDARY_SHA: {secondary_sha}')
+    logging.debug(f'PROJECT_NAME: {project_name}')
     logging.debug(f"DISPLAY_CONFIG_VARS: {os.getenv('INPUT_DISPLAY_CONFIG_VARS')}")
     logging.debug(f"DISPLAY_METRICS: {os.getenv('INPUT_DISPLAY_METRICS')}")
 
