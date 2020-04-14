@@ -7,7 +7,6 @@ Weights & Biases [homepage](https://www.wandb.com/)
 
 <!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
-- [Motivation: Facilitating ML-Ops](#motivation-facilitating-ml-ops)
 - [Features of This Action](#features-of-this-action)
     - [Querying Model Runs](#querying-model-runs)
     - [Querying Additonal Baseline Runs](#querying-additonal-baseline-runs)
@@ -20,23 +19,6 @@ Weights & Biases [homepage](https://www.wandb.com/)
 
 <!-- /TOC -->
 
-## Motivation: Facilitating ML-Ops
-
-The code-review and deployment process re: Machine Learning often involves making decisions about merging or deploying code where critical information regarding model performance and statistics are not readily available.  This is due to the friction in including logging and statistics from model training runs in Pull Requests.  For example, consider this excerpt from a [real pull-request](https://github.com/kubeflow/code-intelligence/pull/54) concerning a machine learning project:
-
->![](/images/pr.png)
-
-In an ideal world, the participants in the above code review should be provided with all of the context necessary to evaluate the PR, including:
-
-- Model performance metrics and statistics
-- Comparison with baselines and other models on a holdout dataset
-- Verification that the metrics and statistics correspond to the code changed in the PR, by tying the results to a commit SHA.
-- Data versioning
-- etc.
-
-This GitHub Action provides tools that facilitate the inclusion of model training results with comparisons of other runs (for example baseline models or current best models), by pulling information regarding model runs you log in [Weights & Biases](https://www.wandb.com/) (W&B) into a **pull request automatically**.  W&B is an experiment tracking system for machine learning models, and is free for open source projects. See these [docs](https://docs.wandb.com/) for more information about the W&B api.
-
-When composed with [other Actions](https://github.com/machine-learning-apps/actions-ml-cicd), this Action is designed to enable [CI/CD for machine learning](https://blog.paperspace.com/ci-cd-for-machine-learning-ai/).
 
 ## Features of This Action
 
