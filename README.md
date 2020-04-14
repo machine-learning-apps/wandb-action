@@ -47,8 +47,6 @@ jobs:
       
   - name: Get Runs Using SHA
     uses: machine-learning-apps/wandb-action@master
-    if: steps.rd.outputs.CONCLUSION == 'success'
-    id: wandb
     with:
       PROJECT_NAME: ${{ format('{0}/{1}', secrets.WANDB_ENTITY, secrets.WANDB_PROJECT) }}
       FILTER_GITHUB_SHA: ${{ steps.chatops.outputs.SHA }}
